@@ -9,7 +9,7 @@ import list from "../../public/list.json";
 import Cards from './Cards';
 function Freebook() {
     const filterData=list.filter((data)=> data.category==="Free");
-    var settings = {
+    const settings = {
         dots: true,
         infinite: false,
         speed: 500,
