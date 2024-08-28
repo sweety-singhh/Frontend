@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import Login from "./Login";
-function Navbar() {
+import Logout from './Logout';
+import { useAuth } from '../context/AuthProvider';
 
-  const [theme,setTheme]= useState(localStorage.getItem("theme")?localStorage.getItem("theme") :"light")
+function Navbar() {
+  const [authUser,setAuthUser]=useAuth()
+ 
+
+  const [theme,setTheme]= useState
+  (localStorage.getItem("theme")?localStorage.getItem("theme") :"light")
   const element=document.documentElement;
   useEffect(()=>{
     if(theme === "dark"){
@@ -38,9 +44,9 @@ function Navbar() {
       
       <li><a href="/course">Course</a></li>
       
-      <li><a href="/contact">Contact</a></li>
+      <li><a>Contact</a></li>
       
-      <li><a href="/about">About</a></li>
+      <li><a>About</a></li>
       
     </>
    );
@@ -84,7 +90,7 @@ function Navbar() {
    
   <div className='hidden md:block'>
   <label className="px-3 py-2 border rounded-md flex items-center gap-2 ">
-  <input type="text" className="grow outline-none bg-inherit text-inherit dark:bg-slate-900 dark:text-white" placeholder="Search" />
+  <input type="text" className="grow outline-none dark:bg-slate-900 dark:text-white" placeholder="Search" />
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 16 16"
@@ -122,13 +128,22 @@ function Navbar() {
   </svg>
 </label>
 
-  <div className=" ">
+{
+  authUser?(
+  <Logout/> 
+):(
+   <div className=" ">
     <a className="bg-black text-white px-3 py-2 rounded-md hover:bg-slate-800 duration-300 cursor-pointer"
-    onClick={() => document.getElementById("my_modal_3").showModal()}>
+    onClick={() => 
+    document.getElementById("my_modal_3").showModal()
+    }>
       Login
       </a>
       <Login/>
-  </div>
+  </div> 
+)}
+
+
       </div>
     </div>
   </div>

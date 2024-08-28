@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form"
-
+import axios from "axios";
+import toast from 'react-hot-toast';
 function Login() {
   const {
     register,
@@ -9,7 +10,39 @@ function Login() {
     
     formState: { errors },
   } = useForm();
-  const onSubmit=(data) => console.log(data);
+  const onSubmit=async (data) => {
+    const userInfo={
+      
+      email:data.email,
+      password:data.password,
+    };
+ await axios
+ .post("http://localhost:4001/user/login", userInfo)
+ .then((res) => {
+     console.log(res.data);
+     if(res.data){
+      
+      toast.success('Login Successfully');
+      document.getElementById("my_modal_3").close();
+      setTimeout( () =>{
+        
+        window.location.reload();
+        localStorage.setItem("Users", JSON.stringify(res.data.user));
+      },1000);
+      
+     
+     }
+     
+  })
+  .catch((err) => {
+    if(err.response){
+      console.log(err);
+      toast.error("Error: " + err.response.data.message);
+      setTimeout(() =>{},2000);
+    }
+    
+  })
+  }
 
   return (
     <div>
@@ -19,15 +52,15 @@ function Login() {
       {/* if there is a button in form, it will close the modal */}
       <Link 
       to="/"
-      className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-black dark:text-black"
+      className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
       onClick={() =>document.getElementById("my_modal_3").close()}
       >✕</Link>
    
-    <h3 className="font-bold text-lg text-black dark:text-black">Login</h3>
+    <h3 className="font-bold text-lg">Login</h3>
     {/* {Email} */}
     <div className='mt-4 space-y-2'>
 
-      <span className="text-black dark:text-black">Email</span>
+      <span>Email</span>
       <br />
       <input type="email" 
       placeholder='Enter your email'
@@ -42,7 +75,7 @@ function Login() {
     {/* {password} */}
     <div className='mt-4 space-y-2'>
 
-      <span className="text-black dark:text-black">Password</span>
+      <span>Password</span>
       <br />
       <input type="password" 
       placeholder='Enter your password'
@@ -62,7 +95,7 @@ function Login() {
    <button className='bg-pink-500 text-white rounded-md px-3 py-1 hover:bg-pink-700 duration-200'>
     Login
     </button>
-   <p className="text-black dark:text-black">Not registered?{" "} 
+   <p>Not registered?{" "} 
     <Link to="/signup" className='underline text-blue-500 cursor-pointer'>
       Signup
       </Link>{" "}
