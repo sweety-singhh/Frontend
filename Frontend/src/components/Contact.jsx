@@ -14,7 +14,7 @@ function Contact() {
   return (
     <>
       <div className='flex h-screen items-center justify-center'>
-        <div className="modal-box">
+        <div className="modal-box dark:bg-slate-800 dark:text-white">
           {/* Close Button */}
           <form onSubmit={handleSubmit(onSubmit)}>
             <Link
@@ -33,7 +33,7 @@ function Contact() {
               <input
                 type="text"
                 placeholder='Enter your fullname'
-                className='w-80 px-3 py-1 border rounded-md outline-none'
+                className='w-80 px-3 py-1 border rounded-md outline-none dark:bg-slate-700 dark:text-white'
                 {...register("name", { required: true })}
               />
               <br />
@@ -47,7 +47,7 @@ function Contact() {
               <input
                 type="email"
                 placeholder='Enter your email'
-                className='w-80 px-3 py-1 border rounded-md outline-none'
+                className='w-80 px-3 py-1 border rounded-md outline-none dark:bg-slate-700 dark:text-white'
                 {...register("email", { required: true })}
               />
               <br />
@@ -60,7 +60,7 @@ function Contact() {
               <br />
               <textarea
                 placeholder='Enter your message'
-                className='w-80 px-3 py-1 border rounded-md outline-none'
+                className='w-80 px-3 py-1 border rounded-md outline-none dark:bg-slate-700 dark:text-white'
                 {...register("message", { required: true })}
               />
               <br />

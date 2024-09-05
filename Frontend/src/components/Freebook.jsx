@@ -24,7 +24,7 @@ function Freebook() {
   getBook();
 },[]);
     
-    var settings = {
+    const settings = {
         dots: true,
         infinite: false,
         speed: 500,
@@ -73,7 +73,6 @@ function Freebook() {
         {book.map((item)=>(
             <Cards item={item} key={item.id}/>
         ))
-
         }
       </Slider>
    </div>
